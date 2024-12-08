@@ -156,26 +156,29 @@
         <div class="form-field" style="font-weight: bold;">
             <asp:Label Text="Name:" AssociatedControlID="txtName" runat="server" />
             <asp:TextBox ID="txtName" runat="server" />
+            <asp:RequiredFieldValidator ID="rfvName" runat="server" ControlToValidate="txtName" InitialValue="" ErrorMessage="Name is required" ForeColor="Red" />
         </div>
 
         <!-- Gender Selection -->
         <div class="form-field gender-field">
             <asp:Label Text="Gender:" runat="server" style="font-weight: bold;" />
-            <div class="radio-buttons">
-                <label for="rdoMale">Male</label>
-                <asp:RadioButton ID="rdoMale" GroupName="Gender" runat="server" />
-                <label for="rdoFemale">Female</label>
-                <asp:RadioButton ID="rdoFemale" GroupName="Gender" runat="server" />
-            </div>
+            <asp:RadioButtonList ID="rblGender" runat="server">
+                <asp:ListItem Text="Male" Value="Male" />
+                <asp:ListItem Text="Female" Value="Female" />
+            </asp:RadioButtonList>
+            <asp:RequiredFieldValidator ID="rfvGender" runat="server" ControlToValidate="rblGender" InitialValue="" ErrorMessage="Gender is required" ForeColor="Red" />
         </div>
 
         <div class="form-field">
             <asp:Label Text="Mobile:" AssociatedControlID="txtMobile" runat="server" />
             <asp:TextBox ID="txtMobile" runat="server" />
+            <asp:RegularExpressionValidator ID="revMobile" runat="server" ControlToValidate="txtMobile" ValidationExpression="^\d{10}$" ErrorMessage="Enter a valid 10-digit mobile number" ForeColor="Red" />
         </div>
+
         <div class="form-field">
             <asp:Label Text="Email:" AssociatedControlID="txtEmail" runat="server" />
             <asp:TextBox ID="txtEmail" runat="server" />
+            <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail" InitialValue="" ErrorMessage="Email is required" ForeColor="Red" />
         </div>
 
         <!-- Course and CV Fields -->
@@ -187,10 +190,13 @@
                 <asp:ListItem Text="MCA" Value="MCA" />
                 <asp:ListItem Text="B Tech" Value="B Tech" />
             </asp:DropDownList>
+            <asp:RequiredFieldValidator ID="rfvCourse" runat="server" ControlToValidate="ddlCourse" InitialValue="" ErrorMessage="Course is required" ForeColor="Red" />
         </div>
+
         <div class="form-field">
             <asp:Label Text="CV:" AssociatedControlID="fuCV" runat="server" />
             <asp:FileUpload ID="fuCV" runat="server" />
+            <asp:RequiredFieldValidator ID="rfvCV" runat="server" ControlToValidate="fuCV" ErrorMessage="CV is required" ForeColor="Red" />
         </div>
 
         <!-- Submit Button -->
@@ -212,8 +218,7 @@
                     <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
                     <asp:BoundField DataField="Course" HeaderText="Course" SortExpression="Course" />
                     <asp:BoundField DataField="CV" HeaderText="CV" SortExpression="CV" />
-                    <asp:CommandField ShowEditButton="True" ButtonType="Button" />
-                    <asp:CommandField ShowDeleteButton="True" ButtonType="Button" />
+                    <asp:CommandField ShowEditButton="true" ShowDeleteButton="true" ButtonType="Button" />
                 </Columns>
             </asp:GridView>
         </div>

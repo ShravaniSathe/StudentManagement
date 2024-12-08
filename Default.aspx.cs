@@ -42,7 +42,7 @@ namespace StudentManagement
         {
             try
             {
-                string gender = rdoMale.Checked ? "Male" : rdoFemale.Checked ? "Female" : string.Empty;
+                string gender = rblGender.SelectedValue;  // Using RadioButtonList for gender selection
 
                 if (string.IsNullOrEmpty(gender))
                 {
@@ -89,8 +89,7 @@ namespace StudentManagement
                 if (student != null)
                 {
                     txtName.Text = student.Name;
-                    rdoMale.Checked = student.Gender == "Male";
-                    rdoFemale.Checked = student.Gender == "Female";
+                    rblGender.SelectedValue = student.Gender;  // Set the selected gender from RadioButtonList
                     txtMobile.Text = student.Mobile;
                     txtEmail.Text = student.Email;
                     ddlCourse.SelectedValue = student.Course;
@@ -112,7 +111,7 @@ namespace StudentManagement
         {
             try
             {
-                string gender = rdoMale.Checked ? "Male" : rdoFemale.Checked ? "Female" : string.Empty;
+                string gender = rblGender.SelectedValue;  // Using RadioButtonList for gender selection
 
                 if (string.IsNullOrEmpty(gender))
                 {
@@ -225,8 +224,7 @@ namespace StudentManagement
             txtMobile.Text = string.Empty;
             txtEmail.Text = string.Empty;
             ddlCourse.SelectedIndex = 0;
-            rdoMale.Checked = false;
-            rdoFemale.Checked = false;
+            rblGender.ClearSelection();  // Clear the selection of the RadioButtonList
             fuCV.Attributes.Clear();
         }
     }
