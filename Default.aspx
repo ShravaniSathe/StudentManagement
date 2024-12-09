@@ -22,8 +22,8 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-            width: 60%; /* Standard form width */
-            min-width: 400px; /* To avoid the form getting too narrow */
+            width: 60%;
+            min-width: 400px;
         }
 
         h2 {
@@ -38,11 +38,11 @@
         .form-field label {
             font-size: 16px;
             color: black;
-            font-weight: bold; /* Make all labels bold */
+            font-weight: bold;
         }
 
         .gender-field .radio-buttons label {
-            font-weight: normal; /* Male and Female text not bold */
+            font-weight: normal;
             margin-left: 10px;
             margin-bottom: 0;
         }
@@ -116,7 +116,7 @@
 
         .grid-container {
             display: flex;
-            justify-content: center; /* Center the grid horizontally */
+            justify-content: center;
             margin-top: 20px;
             margin-bottom: 20px;
         }
@@ -130,7 +130,7 @@
         .grid-container .GridView th, .grid-container .GridView td {
             padding: 15px;
             text-align: center;
-            border: 3px solid #ddd; /* Bold grid borders */
+            border: 3px solid #ddd;
         }
 
         .grid-container .GridView th {
@@ -194,7 +194,10 @@
         </div>
 
         <div class="form-field">
-            <asp:Label Text="CV:" AssociatedControlID="fuCV" runat="server" />
+            <asp:Label ID="lblCurrentCV" Text="Current CV: Not Uploaded" runat="server" Visible="false" />
+        </div>
+        <div class="form-field">
+            <asp:Label Text="Upload CV:" AssociatedControlID="fuCV" runat="server" />
             <asp:FileUpload ID="fuCV" runat="server" />
             <asp:RequiredFieldValidator ID="rfvCV" runat="server" ControlToValidate="fuCV" ErrorMessage="CV is required" ForeColor="Red" />
         </div>

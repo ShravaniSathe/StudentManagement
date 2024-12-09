@@ -89,14 +89,25 @@ namespace StudentManagement
                 if (student != null)
                 {
                     txtName.Text = student.Name;
-                    rblGender.SelectedValue = student.Gender;  // Set the selected gender from RadioButtonList
+                    rblGender.SelectedValue = student.Gender; // Set the selected gender from RadioButtonList
                     txtMobile.Text = student.Mobile;
                     txtEmail.Text = student.Email;
                     ddlCourse.SelectedValue = student.Course;
+
                     ViewState["StudentId"] = student.Id;
                     ViewState["StudentCV"] = student.CV;
 
-                    // Show the Update button and hide the Submit button
+                    if (!string.IsNullOrEmpty(student.CV))
+                    {
+                        lblCurrentCV.Text = $"Current CV: <a href='UploadedFiles/{student.CV}' target='_blank'>{student.CV}</a>";
+                        lblCurrentCV.Visible = true;
+                    }
+                    else
+                    {
+                        lblCurrentCV.Text = "No CV uploaded.";
+                        lblCurrentCV.Visible = true;
+                    }
+
                     btnSubmit.Visible = false;
                     btnUpdate.Visible = true;
                 }
@@ -111,7 +122,7 @@ namespace StudentManagement
         {
             try
             {
-                string gender = rblGender.SelectedValue;  // Using RadioButtonList for gender selection
+                string gender = rblGender.SelectedValue; // Using RadioButtonList for gender selection
 
                 if (string.IsNullOrEmpty(gender))
                 {
@@ -120,11 +131,17 @@ namespace StudentManagement
                 }
 
                 string fileName = null;
+
                 if (fuCV.HasFile)
                 {
                     fileName = Path.GetFileName(fuCV.FileName);
                     string filePath = Server.MapPath("~/UploadedFiles/" + fileName);
                     fuCV.SaveAs(filePath);
+                }
+                else if (ViewState["StudentCV"] != null)
+                {
+                    // Use the existing CV if no new file is uploaded
+                    fileName = ViewState["StudentCV"].ToString();
                 }
 
                 if (ViewState["StudentId"] == null)
@@ -132,8 +149,6 @@ namespace StudentManagement
                     lblMessage.Text = "Student ID is missing.";
                     return;
                 }
-
-                string studentCV = ViewState["StudentCV"]?.ToString() ?? string.Empty;
 
                 Student student = new Student
                 {
@@ -143,7 +158,7 @@ namespace StudentManagement
                     Mobile = txtMobile.Text,
                     Email = txtEmail.Text,
                     Course = ddlCourse.SelectedValue,
-                    CV = fileName ?? studentCV
+                    CV = fileName
                 };
 
                 _repository.UpdateStudent(student);
@@ -224,8 +239,11 @@ namespace StudentManagement
             txtMobile.Text = string.Empty;
             txtEmail.Text = string.Empty;
             ddlCourse.SelectedIndex = 0;
-            rblGender.ClearSelection();  // Clear the selection of the RadioButtonList
+            rblGender.ClearSelection(); // Clear the selection of the RadioButtonList
             fuCV.Attributes.Clear();
+            lblCurrentCV.Text = string.Empty;
+            lblCurrentCV.Visible = false;
         }
+
     }
 }
