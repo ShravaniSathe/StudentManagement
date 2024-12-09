@@ -42,7 +42,7 @@ namespace StudentManagement
         {
             try
             {
-                string gender = rblGender.SelectedValue;  // Using RadioButtonList for gender selection
+                string gender = rblGender.SelectedValue;  
 
                 if (string.IsNullOrEmpty(gender))
                 {
@@ -89,7 +89,7 @@ namespace StudentManagement
                 if (student != null)
                 {
                     txtName.Text = student.Name;
-                    rblGender.SelectedValue = student.Gender; // Set the selected gender from RadioButtonList
+                    rblGender.SelectedValue = student.Gender; 
                     txtMobile.Text = student.Mobile;
                     txtEmail.Text = student.Email;
                     ddlCourse.SelectedValue = student.Course;
@@ -122,7 +122,7 @@ namespace StudentManagement
         {
             try
             {
-                string gender = rblGender.SelectedValue; // Using RadioButtonList for gender selection
+                string gender = rblGender.SelectedValue; 
 
                 if (string.IsNullOrEmpty(gender))
                 {
@@ -140,7 +140,7 @@ namespace StudentManagement
                 }
                 else if (ViewState["StudentCV"] != null)
                 {
-                    // Use the existing CV if no new file is uploaded
+                    
                     fileName = ViewState["StudentCV"].ToString();
                 }
 
@@ -199,20 +199,19 @@ namespace StudentManagement
             }
         }
 
-        // Missing gvStudents_RowUpdating Method
         protected void gvStudents_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             try
             {
                 int studentId = Convert.ToInt32(gvStudents.DataKeys[e.RowIndex].Value);
 
-                // Retrieve the updated values
+                
                 string updatedName = ((TextBox)gvStudents.Rows[e.RowIndex].FindControl("txtEditName")).Text;
                 string updatedMobile = ((TextBox)gvStudents.Rows[e.RowIndex].FindControl("txtEditMobile")).Text;
                 string updatedEmail = ((TextBox)gvStudents.Rows[e.RowIndex].FindControl("txtEditEmail")).Text;
                 string updatedCourse = ((DropDownList)gvStudents.Rows[e.RowIndex].FindControl("ddlEditCourse")).SelectedValue;
 
-                // Update the student information
+                
                 Student student = new Student
                 {
                     Id = studentId,
@@ -239,7 +238,7 @@ namespace StudentManagement
             txtMobile.Text = string.Empty;
             txtEmail.Text = string.Empty;
             ddlCourse.SelectedIndex = 0;
-            rblGender.ClearSelection(); // Clear the selection of the RadioButtonList
+            rblGender.ClearSelection(); 
             fuCV.Attributes.Clear();
             lblCurrentCV.Text = string.Empty;
             lblCurrentCV.Visible = false;

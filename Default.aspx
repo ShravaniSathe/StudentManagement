@@ -42,9 +42,15 @@
         }
 
         .gender-field .radio-buttons label {
-            font-weight: normal;
-            margin-left: 10px;
-            margin-bottom: 0;
+           
+            
+            margin-right: 20px;
+           
+        }
+
+        .gender-field .radio-buttons input 
+        {
+            margin-right: 10px; 
         }
 
         .form-field input, .form-field select {
@@ -62,14 +68,14 @@
 
         .gender-field {
             display: flex;
-            flex-direction: column;
             align-items: flex-start;
+            gap: 5px;
         }
 
         .gender-field .radio-buttons {
             display: flex;
-            flex-direction: row;
-            align-items: center;
+            align-items: flex-start;
+            gap: 5px;
         }
        
         .button-container {
@@ -161,13 +167,13 @@
 
         <!-- Gender Selection -->
         <div class="form-field gender-field">
-            <asp:Label Text="Gender:" runat="server" style="font-weight: bold;" />
-            <asp:RadioButtonList ID="rblGender" runat="server">
+             <asp:Label Text="Gender:" runat="server" style="font-weight: bold;" />
+             <asp:RadioButtonList ID="rblGender" runat="server" RepeatDirection="Horizontal">
                 <asp:ListItem Text="Male" Value="Male" />
                 <asp:ListItem Text="Female" Value="Female" />
-            </asp:RadioButtonList>
-            <asp:RequiredFieldValidator ID="rfvGender" runat="server" ControlToValidate="rblGender" InitialValue="" ErrorMessage="Gender is required" ForeColor="Red" />
-        </div>
+             </asp:RadioButtonList>
+             <asp:RequiredFieldValidator ID="rfvGender" runat="server" ControlToValidate="rblGender" InitialValue="" ErrorMessage="Gender is required" ForeColor="Red" />
+         </div>
 
         <div class="form-field">
             <asp:Label Text="Mobile:" AssociatedControlID="txtMobile" runat="server" />

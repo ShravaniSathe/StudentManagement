@@ -39,7 +39,7 @@ namespace StudentManagement.Repositories.Implementation
             return students;
         }
 
-        public Student GetStudentById(int id) // Get student by ID
+        public Student GetStudentById(int id) 
         {
             Student student = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
